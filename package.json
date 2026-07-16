@@ -1,0 +1,66 @@
+{
+  "name": "worklog-kb-grill",
+  "version": "1.2.0-grill.1",
+  "description": "CLI tool for personal work log knowledge base with LLM follow-up grill mode — fork of worklog-kb v1.1.0 adding --grill option for interactive Q&A driven body generation.",
+  "type": "module",
+  "bin": {
+    "worklog": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node --test dist/**/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "worklog",
+    "cli",
+    "daily-log",
+    "weekly-report",
+    "monthly-report",
+    "knowledge-base",
+    "obsidian",
+    "git",
+    "markdown",
+    "llm",
+    "grill",
+    "follow-up"
+  ],
+  "author": "xiaojiyao <xiaojiyao@manteiatech.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RandomXJJ/WorkGit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RandomXJJ/WorkGit/issues"
+  },
+  "homepage": "https://github.com/RandomXJJ/WorkGit#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "inquirer": "^9.2.0",
+    "chalk": "^5.3.0",
+    "gray-matter": "^4.0.3",
+    "luxon": "^3.4.0",
+    "conf": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.0",
+    "@types/luxon": "^3.4.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.0.0",
+    "@google/generative-ai": "^0.2.0"
+  }
+}

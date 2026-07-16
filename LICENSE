@@ -1,0 +1,56 @@
+MIT License
+
+Copyright (c) 2024 yangmeishux (worklog-kb v1.1.0, original work)
+Copyright (c) 2026 xiaojiyao (worklog-kb-grill v1.2.0-grill.1, modifications)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+Modifications from upstream worklog-kb v1.1.0
+================================================================================
+
+This package (worklog-kb-grill) is a fork of worklog-kb v1.1.0, adding a
+new `--grill` option to the `worklog log` command. The `--grill` flag runs an
+interactive 3-round LLM-driven Q&A loop after classification and synthesizes
+the answers into 4 retrospective sections (work record / notes / detailed notes
+/ today's summary) of the daily log body.
+
+All modifications are confined to the `dist/` directory:
+
+  - dist/lib/llm.js         (refactored: providers return raw text; new
+                             callLLMRaw export)
+  - dist/lib/grill.js       (NEW: 3-round Q&A loop + SIGINT handler + prompts)
+  - dist/lib/storage.js     (accepts optional bodyContent; generateCalloutsBody
+                             renders the 4 retrospective blocks)
+  - dist/lib/storage.d.ts   (synced type signatures)
+  - dist/lib/grill.demo.js  (NEW: mock-based smoke test, not shipped as a CLI
+                             entry point)
+  - dist/commands/log.js    (new --grill option wiring grill → storage)
+
+The original `worklog-kb` is published on npm and its declared upstream
+repository URL (https://github.com/yangmeishux/worklog-cli) was unreachable at
+the time of this fork; modifications were applied directly to the published
+`dist/` artifacts. Source TypeScript is not included in this package.
+
+Usage:
+
+  npm install -g https://github.com/RandomXJJ/WorkGit.git
+  worklog init
+  worklog config --provider deepseek --key <your-api-key>
+  worklog log --ai --grill "今天完成了 X 项目的整体梳理"
